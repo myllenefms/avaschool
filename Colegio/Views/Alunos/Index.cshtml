@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<Colegio.Models.Aluno>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Alunos</title>
+</head>
+<body>
+    <h1>Alunos</h1>
+    <p>
+        <!-- uso de TagHelpers para definir o Controller e a Action -->
+        <a asp-controller="Alunos" asp-action="Cadastrar">Novo Aluno</a>
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Turma</th>
+            <th>Nascimento</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.IdAluno</label>
+                </td>
+                <td>
+                    <label>@item.nomeAluno</label>
+                </td>
+                <td>
+                    <label>@item.turma</label>
+                </td>
+                <td>
+                    <label>@item.dataNascimentoAluno</label>
+                </td>
+                <td>
+
+                    <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+                    <a asp-controller="Aluno"
+                       asp-action="Editar"
+                       asp-route-id="@item.IdAluno">Editar</a>
+
+                    <a asp-controller="Aluno"
+                       asp-action="Consultar"
+                       asp-route-id="@item.IdAluno">Consultar</a>
+
+                    <a asp-controller="Aluno"
+                       asp-action="Excluir"
+                       asp-route-id="@item.IdAluno">Excluir</a>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
